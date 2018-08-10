@@ -58,5 +58,37 @@ namespace YetAnotherMinesweeper.ViewModel
                     Cells[NumCols * j + i] = new Cell(i, j);
 
         }
+
+        private List<int> GetIndexesAround(int x, int y)
+        {
+            List<int> r = new List<int>();
+
+            //00
+            if (y - 1 >= 0 & y - 1 < NumRows & x - 1 >= 0 & x - 1 < NumCols)
+                r.Add((y - 1) * NumCols + x - 1);
+            //01
+            if (y - 0 >= 0 & y - 0 < NumRows & x - 1 >= 0 & x - 1 < NumCols)
+                r.Add((y - 0) * NumCols + x - 1);
+            //02
+            if (y + 1 >= 0 & y + 1 < NumRows & x - 1 >= 0 & x - 1 < NumCols)
+                r.Add((y + 1) * NumCols + x - 1);
+            //10
+            if (y - 1 >= 0 & y - 1 < NumRows & x - 0 >= 0 & x - 0 < NumCols)
+                r.Add((y - 1) * NumCols + x - 0);
+            //12
+            if (y + 1 >= 0 & y + 1 < NumRows & x - 0 >= 0 & x - 0 < NumCols)
+                r.Add((y + 1) * NumCols + x - 0);
+            //20
+            if (y - 1 >= 0 & y - 1 < NumRows & x + 1 >= 0 & x + 1 < NumCols)
+                r.Add((y - 1) * NumCols + x + 1);
+            //21
+            if (y - 0 >= 0 & y - 0 < NumRows & x + 1 >= 0 & x + 1 < NumCols)
+                r.Add((y - 0) * NumCols + x + 1);
+            //22
+            if (y + 1 >= 0 & y + 1 < NumRows & x + 1 >= 0 & x + 1 < NumCols)
+                r.Add((y + 1) * NumCols + x + 1);
+
+            return r;
+        }
     }
 }
