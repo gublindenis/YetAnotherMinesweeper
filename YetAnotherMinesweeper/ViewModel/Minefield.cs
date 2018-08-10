@@ -59,6 +59,22 @@ namespace YetAnotherMinesweeper.ViewModel
 
         }
 
+        private void Mining()
+        {
+            Random r = new Random();
+            for (int i = 0; i < NumBombs; i++)
+            {
+                int v = r.Next(0, NumCols * NumRows - 1);
+                if (Cells[v].IsBomb != true)
+                {
+                    Cells[v].IsBomb = true;
+                    foreach (var cellIndex in GetIndexesAround(Cells[v].X, Cells[v].Y))
+                        Cells[cellIndex].BombQuantityAround++;
+                }
+                else i--;
+            }
+        }
+
         private List<int> GetIndexesAround(int x, int y)
         {
             List<int> r = new List<int>();
