@@ -106,5 +106,19 @@ namespace YetAnotherMinesweeper.ViewModel
 
             return r;
         }
+
+        public void CellCheck(Cell c)
+        {
+            c.Open();
+            if (c.BombQuantityAround == 0)
+                foreach (var i in GetIndexesAround(c.X, c.Y))
+                    if (Cells[i].State == CellStates.CLOSE)
+                        CellCheck(Cells[i]);
+            if (c.State == CellStates.OPEN_BOMB)
+                TheEnd = true;
+            CountOpenCells++;
+            if (CountOpenCells == NumCols * NumRows - NumBombs)
+                TheEnd = true;
+        }
     }
 }
