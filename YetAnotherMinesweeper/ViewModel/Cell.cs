@@ -1,4 +1,4 @@
-﻿using Minesweeper.Helpers;
+﻿using YetAnotherMinesweeper.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Minesweeper.Helpers
+namespace YetAnotherMinesweeper.Helpers
 {
     public abstract class ObservableObject : INotifyPropertyChanged
     {
