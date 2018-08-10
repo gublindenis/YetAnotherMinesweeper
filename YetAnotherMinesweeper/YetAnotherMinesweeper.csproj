@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModel\Cell.cs" />
     <Compile Include="ViewModel\CellStates.cs" />
+    <Compile Include="ViewModel\GameSuperviser.cs" />
     <Compile Include="ViewModel\Minefield.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
