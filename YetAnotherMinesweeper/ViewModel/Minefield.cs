@@ -48,6 +48,7 @@ namespace YetAnotherMinesweeper.ViewModel
             CountOpenCells = 0;
             TheEnd = false;
             CellFilling();
+            Mining();
         }
 
         private void CellFilling()
