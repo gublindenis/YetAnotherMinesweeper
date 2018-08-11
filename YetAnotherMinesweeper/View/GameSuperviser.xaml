@@ -1,0 +1,79 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:YetAnotherMinesweeper.View"
+    xmlns:ViewModel="clr-namespace:YetAnotherMinesweeper.ViewModel"
+    x:Class="Minesweeper.View.GameSuperviser"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="300" >
+
+    <UserControl.DataContext>
+        <ViewModel:GameSuperviser/>
+    </UserControl.DataContext>
+
+    <Grid x:Name="_rootGrid" x:FieldModifier="private" Margin="0" >
+
+        <DockPanel Margin="4" Background="WhiteSmoke" Opacity="0.75">
+
+            <Grid DockPanel.Dock="Bottom" Width="auto" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0" Grid.Row="0">Столбцы</Label>
+                <Label Grid.Column="0" Grid.Row="1">Строки</Label>
+                <Label Grid.Column="0" Grid.Row="2">Бомбы</Label>
+                <Label Grid.Column="1" Grid.Row="0" Content="{Binding NumCols}"/>
+                <Label Grid.Column="1" Grid.Row="1" Content="{Binding NumRows}"/>
+                <Label Grid.Column="1" Grid.Row="2" Content="{Binding NumBombs}"/>
+
+                <Slider Grid.Column="2" Grid.Row="0" x:Name="RowSlider" Minimum="9" Maximum="40" VerticalAlignment="Center" Width="200" Value="{Binding NumCols}"/>
+                <Slider Grid.Column="2" Grid.Row="1" x:Name="ColSlider" Minimum="9" Maximum="20" VerticalAlignment="Center" Width="200" Value="{Binding NumRows}"/>
+                <Slider Grid.Column="2" Grid.Row="2" x:Name="BombSlider" Minimum="9" Maximum="100" VerticalAlignment="Center" Width="200" Value="{Binding NumBombs}"/>
+            </Grid>
+
+            <TextBlock FontSize="18"
+                       Foreground="Black"
+                       FontWeight="UltraBold"
+                Grid.Column="0"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,40"
+                           DockPanel.Dock="Bottom" >
+                <TextBlock.Resources>
+                    <Style x:Key="PlayAgainButtonTextStyle" TargetType="{x:Type TextBlock}">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="Green" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Resources>
+                    <Hyperlink FocusVisualStyle="{x:Null}"
+                               TextDecorations="None"
+                               Click="Hyperlink_Click">
+                        <InlineUIContainer>
+                            <TextBlock Style="{StaticResource PlayAgainButtonTextStyle}">
+                                <Run Text="СТАРТ"/>
+                            </TextBlock>
+                        </InlineUIContainer>
+                    </Hyperlink>
+                </TextBlock>
+
+            <TextBlock FontSize="18"
+                       HorizontalAlignment="Center"
+                       Text="ИГРАЕМ?"
+                       TextWrapping="Wrap"
+                       VerticalAlignment="Bottom"
+                       MaxWidth="Infinity" />
+        </DockPanel>
+    </Grid>
+</UserControl>

@@ -59,6 +59,10 @@
     <Compile Include="ViewModel\CellStates.cs" />
     <Compile Include="ViewModel\GameSuperviser.cs" />
     <Compile Include="ViewModel\Minefield.cs" />
+    <Page Include="View\GameSuperviser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -68,6 +72,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\ObservableObject.cs" />
+    <Compile Include="View\GameSuperviser.xaml.cs">
+      <DependentUpon>GameSuperviser.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
