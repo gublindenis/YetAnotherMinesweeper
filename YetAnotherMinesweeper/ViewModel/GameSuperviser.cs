@@ -18,7 +18,6 @@ namespace YetAnotherMinesweeper.ViewModel
             }
         }
 
-
         private int _numCols;
         public int NumCols
         {
