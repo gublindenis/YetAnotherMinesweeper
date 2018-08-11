@@ -5,6 +5,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:YetAnotherMinesweeper.ViewModel"
+        xmlns:v="clr-namespace:YetAnotherMinesweeper.View"
         xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" ResizeMode="NoResize" SizeToContent="WidthAndHeight" ScrollViewer.CanContentScroll="True">
@@ -24,11 +25,29 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate >
                 <DataTemplate>
-                    <UserControl Margin="0,0,0,0" Height="35" Width="35" Content="{Binding Title}"   VerticalContentAlignment="Center" HorizontalContentAlignment="Center"   >
+                    <UserControl Margin="0,0,0,0" Height="35" Width="35" Content="{Binding Title}"  MouseRightButtonUp="UserControl_MouseRightClick" BorderBrush="White" BorderThickness="0.25" MouseLeftButtonUp="UserControl_MouseLeftClick"  VerticalContentAlignment="Center" HorizontalContentAlignment="Center"   >
                         <UserControl.Style>
                             <Style>
                                 <Setter Property="Control.Background"  Value="DarkGreen" />
-
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding State}" Value="MARKED">
+                                        <Setter Property="Control.Background">
+                                            <Setter.Value>
+                                                <ImageBrush ImageSource="/YetAnotherMinesweeper;component/Images/no-entry.png"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding State}" Value="OPEN_CLEAR">
+                                        <Setter Property="Control.Background" Value="DarkKhaki" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding State}" Value="OPEN_BOMB">
+                                        <Setter Property="Control.Background">
+                                            <Setter.Value>
+                                                <ImageBrush ImageSource="/YetAnotherMinesweeper;component/Images/explosion.png"/>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </DataTrigger>
+                                </Style.Triggers>
                             </Style>
                         </UserControl.Style>
                     </UserControl>
@@ -36,6 +55,19 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-
+        <v:GameSuperviser x:Name="gameSuperviser">
+            <v:GameSuperviser.Style>
+                <Style TargetType="{x:Type v:GameSuperviser}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding DataContext.MainMinefield.TheEnd, ElementName=gameSuperviser}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding DataContext.MainMinefield.TheEnd, ElementName=gameSuperviser}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </v:GameSuperviser.Style>
+        </v:GameSuperviser>
     </Grid>
 </Window>
