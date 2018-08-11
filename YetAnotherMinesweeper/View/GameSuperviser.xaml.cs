@@ -24,5 +24,10 @@ namespace YetAnotherMinesweeper.View
         {
             InitializeComponent();
         }
+
+        private void Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            ((YetAnotherMinesweeper.ViewModel.GameSuperviser)(this.DataContext)).CreateMinefield();
+        }
     }
 }
