@@ -12,6 +12,7 @@ namespace YetAnotherMinesweeper.ViewModel.UnitTests
     public class Minefield_Tests
     {
 
+        #region проверка метода, который возвращает индексы соседей
         [TestMethod()]
         public void GetIndexesAroundTest00()
         {
@@ -146,6 +147,18 @@ namespace YetAnotherMinesweeper.ViewModel.UnitTests
             actual.Sort();
             CollectionAssert.AreEqual(expected, actual);
         }
+        #endregion
 
+        //проверка минирования
+        [TestMethod()]
+        public void Minefield_Test()
+        {
+            int ExpectedBombsCount = 75;
+            int ActualBombsCount = 0;
+            Minefield m = new Minefield(10, 10, ExpectedBombsCount);
+            foreach (Cell c in m.Cells)
+                if (c.IsBomb) ActualBombsCount++;
+            Assert.AreEqual(ExpectedBombsCount, ActualBombsCount);
+        }
     }
 }

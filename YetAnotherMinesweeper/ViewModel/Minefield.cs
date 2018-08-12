@@ -63,9 +63,9 @@ namespace YetAnotherMinesweeper.ViewModel
         private void Mining()
         {
             Random r = new Random();
-            for (int i = 0; i < NumBombs; i++)
+            for (int i = 0; i < NumBombs && i < NumCols * NumRows - 1; i++)
             {
-                int v = r.Next(0, NumCols * NumRows - 1);
+                int v = r.Next(0, NumCols * NumRows);
                 if (Cells[v].IsBomb != true)
                 {
                     Cells[v].IsBomb = true;
@@ -115,11 +115,15 @@ namespace YetAnotherMinesweeper.ViewModel
                 foreach (var i in GetIndexesAround(c.X, c.Y))
                     if (Cells[i].State == CellStates.CLOSE)
                         CellCheck(Cells[i]);
-            if (c.State == CellStates.OPEN_BOMB)
-                TheEnd = true;
             CountOpenCells++;
-            if (CountOpenCells == NumCols * NumRows - NumBombs)
+            CheckTheEnd(c.State);
+        }
+
+        private void CheckTheEnd(CellStates s)
+        {
+            if (s == CellStates.OPEN_BOMB || CountOpenCells == NumCols * NumRows - NumBombs)
                 TheEnd = true;
         }
+
     }
 }
